@@ -9,6 +9,7 @@ import java.util.*;
 public class FileUploadService {
 
     private static final String TXT_EXTENSION = "txt";
+    private static final String DIR = "";
 
     public List<String> fromFile(MultipartFile[] uploadedFiles) {
         List<String> data = new ArrayList<>();
@@ -39,12 +40,13 @@ public class FileUploadService {
     }
 
     public void toFile(MultipartFile[] files) {
+        String home = System.getProperty("user.home");
         if (!isNotTxt(files)) {
             try {
-                FileWriter fileWriterAd = new FileWriter("prasidedantysAG.txt");
-                FileWriter fileWriterDg = new FileWriter("prasidedantysHN.txt");
-                FileWriter fileWriterGo = new FileWriter("prasidedantysOU.txt");
-                FileWriter fileWriterOz = new FileWriter("prasidedantysVZ.txt");
+                FileWriter fileWriterAd = new FileWriter(home + File.separator + "Downloads" + File.separator + "prasidedantysAG.txt");
+                FileWriter fileWriterDg = new FileWriter(home + File.separator + "Downloads" + File.separator + "prasidedantysHN.txt");
+                FileWriter fileWriterGo = new FileWriter(home + File.separator + "Downloads" + File.separator + "prasidedantysOU.txt");
+                FileWriter fileWriterOz = new FileWriter(home + File.separator + "Downloads" + File.separator + "prasidedantysVZ.txt");
                 for (Map.Entry<String, Integer> wordCount : getWordCountList(files)) {
                     if (wordCount.getKey().toLowerCase().charAt(0) <= 'g') {
                         fileWriterAd.write(wordCount.getKey() + " yra " + wordCount.getValue() + " vnt. " + System.getProperty("line.separator"));
